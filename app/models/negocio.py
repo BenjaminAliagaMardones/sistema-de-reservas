@@ -21,9 +21,12 @@ class Negocio(Base):
     telefono = Column(String(20), nullable=False)
     direccion = Column(String(255), nullable=False)
 
-    #relacione
+    #relacion con propietario
     propietario_id = Column(Integer, ForeignKey("usuarios.id"), nullable=False, index=True)
     propietario = relationship("Usuarios", back_populates="negocios")
+
+    #relacion con servicio
+    servicios = relationship("Servicio", back_populates="negocio")
     
     #soft delete
     deleted_at = Column(DateTime(timezone=True), nullable=True)
