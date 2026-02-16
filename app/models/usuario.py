@@ -40,6 +40,7 @@ class Usuario(Base):
     # relaciones
     negocio_id = Column(Integer, ForeignKey("negocios.id"), nullable=True)
     negocios = relationship("Negocio", back_populates="propietarios")
+    reservas = relationship("Reserva", back_populates="cliente")
     
     #soft delete    
     deleted_at = Column(DateTime(timezone=True), nullable=True)
