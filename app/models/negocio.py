@@ -28,6 +28,8 @@ class Negocio(Base):
     #relacion con servicio
     servicios = relationship("Servicio", back_populates="negocio")
     
+    #relacion con reserva
+    reserva = relationship("Reserva", back_populates="negocio")
     #soft delete
     deleted_at = Column(DateTime(timezone=True), nullable=True)
 
