@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 from datetime import datetime
+
 class ServicioCreate(BaseModel):
     nombre: str = Field(..., min_length=3, max_length=150)
     descripcion: Optional[str] = Field(None, max_length=1000)
