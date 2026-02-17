@@ -39,7 +39,7 @@ class ReservaRepository:
         return reserva
     
     def obtener_por_cliente(self, db: Session, cliente_id: int):
-        reserva = db.query(Reserva).filter(Reserva.cliente_id == cliente_id). all()
+        reserva = db.query(Reserva).filter(Reserva.cliente_id == cliente_id).all()
         return reserva
 
 
