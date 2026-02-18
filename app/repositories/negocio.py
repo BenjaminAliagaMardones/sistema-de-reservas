@@ -4,8 +4,7 @@ from app.schemas.negocio import NegocioCreate, NegocioUpdate
 from datetime import datetime, timezone
 
 class NegocioRepository:
-    def crear(self, db: Session, datos: NegocioCreate):
-        negocio = Negocio(**datos.model_dump())
+    def crear(self, db: Session, negocio: Negocio):
 
         db.add(negocio)
         db.commit()
@@ -34,3 +33,7 @@ class NegocioRepository:
         negocio = db.query(Negocio).filter(Negocio.id == id).first()
         negocio.deleted_at = datetime.now(timezone.utc)
         db.commit()
+
+    def obtener_por_slug(self, db: Session, slug: str):
+        negocio = db.query(Negocio).filter(Negocio.slug == slug).first()
+        return negocio
