@@ -1,5 +1,5 @@
 from app.repositories.usuario import UsuarioRepository
-from app.schemas.usuario import UsuarioCreate
+from app.schemas.usuario import UsuarioCreate, UsuarioUpdate
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
 from app.models.usuario import Usuario
@@ -42,7 +42,7 @@ class UsuarioService:
         
         return self.repository.obtener_todos(db)
     
-    def actualizar(self, db: Session, id: int, datos):
+    def actualizar(self, db: Session, id: int, datos: UsuarioUpdate):
         usuario = self.obtener_por_id(db, id)
 
         return self.repository.actualizar(db, id, datos)

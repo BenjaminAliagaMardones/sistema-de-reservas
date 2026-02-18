@@ -1,4 +1,5 @@
 from app.repositories.negocio import NegocioRepository
+from app.schemas.negocio import NegocioCreate, NegocioUpdate
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
 from app.models.negocio import Negocio
@@ -7,7 +8,7 @@ class NegocioService:
     def __init__(self):
         self.repository = NegocioRepository()
 
-    def crear(self, db: Session, datos, propietario_id: int):
+    def crear(self, db: Session, datos: NegocioCreate, propietario_id: int):
         slug = datos.nombre.lower().replace(" ", "-")
 
         if self.repository.obtener_por_slug(db, slug):
@@ -32,7 +33,7 @@ class NegocioService:
     def obtener_todos(self, db: Session):
         return self.repository.obtener_todos(db)
     
-    def actualizar(self, db: Session, id: int, datos):
+    def actualizar(self, db: Session, id: int, datos: NegocioUpdate):
         negocio = self.obtener_por_id(db, id)
 
         return self.repository.actualizar(db, id, datos)

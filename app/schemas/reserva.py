@@ -16,6 +16,7 @@ class ReservaCreate(BaseModel):
     hora_inicio: time
     servicio_id: int
     negocio_id: int
+    cliente_id: int
     notas_cliente: Optional[str] = None
 
 class ReservaUpdateEstado(BaseModel):
