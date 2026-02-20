@@ -39,7 +39,7 @@ class Usuario(Base):
 
     # relaciones
     negocio_id = Column(Integer, ForeignKey("negocios.id"), nullable=True)
-    negocios = relationship("Negocio", back_populates="propietario")
+    negocio = relationship("Negocio", back_populates="propietario")
     reservas = relationship("Reserva", back_populates="cliente")
     
     #soft delete    

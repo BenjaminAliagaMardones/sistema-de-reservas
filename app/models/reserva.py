@@ -10,7 +10,7 @@ from enum import Enum
 class EstadoReserva(str, Enum):
     PENDIENTE = "pendiente"
     CONFIRMADA = "confirmada"
-    CANCELADA = "canceladas"
+    CANCELADA = "cancelada"
     RECHAZADA = "rechazada"
     COMPLETADA = "completada"
     NO_SHOW = "no_show"
@@ -39,6 +39,11 @@ class Reserva(Base):
     hora_inicio = Column(Time, nullable=False)
     hora_fin = Column(Time, nullable=False)
 
+    notas_cliente = Column(Text, nullable=True)
+    notas_negocio = Column(Text, nullable=True)
+    motivo_cancelacion = Column(Text, nullable=True)
+
+
     estado = Column(
         String(20),
         nullable=False,
@@ -66,5 +71,6 @@ class Reserva(Base):
     updated_at = Column(
         DateTime(timezone=True),
         server_default=func.now(),
+        onupdate=func.now(),    
         nullable=False
     )

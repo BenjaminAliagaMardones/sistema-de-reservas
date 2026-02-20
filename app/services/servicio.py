@@ -10,11 +10,11 @@ class ServicioService:
 
     def crear(self, db: Session, datos: ServicioCreate, negocio_id: int):
      
-          servicios_negocio = self.repository.obtener_por_negocio(db, negocio_id)
-          if any(servicio.nombre == datos.nombre for servicio in servicios_negocio):
-               raise HTTPException(400, "El servicio ya existe")
+        servicios_negocio = self.repository.obtener_por_negocio(db, negocio_id)
+        if any(servicio.nombre == datos.nombre for servicio in servicios_negocio):
+            raise HTTPException(400, "El servicio ya existe")
           
-          return self.repository.crear(db, datos, negocio_id)
+        return self.repository.crear(db, datos, negocio_id)
     
     def obtener_por_id(self, db: Session, id: int):
          servicio = self.repository.obtener_por_id(db, id)
