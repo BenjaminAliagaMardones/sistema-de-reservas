@@ -1,10 +1,11 @@
 from sqlalchemy import (
     Column, Integer, String, DateTime, ForeignKey,
-    CheckConstraint, UniqueConstraint, Enum, Date, Time
+    CheckConstraint, UniqueConstraint, Date, Time
 )
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.db.database import Base
+from enum import Enum
 
 class EstadoReserva(str, Enum):
     PENDIENTE = "pendiente"
@@ -25,7 +26,7 @@ class Reserva(Base):
         ),
 
         UniqueConstraint(
-            "cliente_id", "fecha", "hora_inicio",
+            "servicio_id", "fecha", "hora_inicio",
             name="uq_reserva_servicio_fecha_hora"
         ),
 
@@ -45,8 +46,8 @@ class Reserva(Base):
     )
 
     #relacion con cliente
-    cliente_id = Column(Integer, ForeignKey("usuarios.id"), nullable=False),
-    cliente = relationship("Usuarios", back_populates="reservas")
+    cliente_id = Column(Integer, ForeignKey("usuarios.id"), nullable=False)
+    cliente = relationship("Usuario", back_populates="reservas")
 
     #relacion con servicio
     servicio_id = Column(Integer, ForeignKey("servicios.id"), nullable=False )

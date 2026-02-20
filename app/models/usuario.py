@@ -1,6 +1,6 @@
 from sqlalchemy import (
     Column, Integer, String, DateTime, ForeignKey,
-    CheckConstraint, UniqueConstraint, Index, Boolean, Text
+    CheckConstraint, UniqueConstraint, Index, Boolean, Text, Enum as SAEnum
 )
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -34,12 +34,12 @@ class Usuario(Base):
     password_hash = Column(String(255), nullable=False)
     
     #rol y permiso
-    rol = Column(Enum(RolUsuario), nullable=False, default=RolUsuario.CLIENTE)
+    rol = Column(SAEnum(RolUsuario), nullable=False, default=RolUsuario.CLIENTE)
     is_active = Column(Boolean, default=True, nullable=False)
 
     # relaciones
     negocio_id = Column(Integer, ForeignKey("negocios.id"), nullable=True)
-    negocios = relationship("Negocio", back_populates="propietarios")
+    negocios = relationship("Negocio", back_populates="propietario")
     reservas = relationship("Reserva", back_populates="cliente")
     
     #soft delete    

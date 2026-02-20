@@ -10,8 +10,10 @@ from app.db.database import Base
 class Negocio(Base):
     __tablename__ = "negocios"
 
-    __table_args__ = UniqueConstraint("slug", name="uq_negocio_slug"),
-    CheckConstraint("char_length(nombre) > 0", name="ck_negocios_nombre_not_empty")
+    __table_args__ = (
+        UniqueConstraint("slug", name="uq_negocio_slug"),
+        CheckConstraint("char_length(nombre) > 0", name="ck_negocios_nombre_not_empty")
+    )
 
     id = Column(Integer, primary_key=True, index=True)
     
@@ -23,13 +25,13 @@ class Negocio(Base):
 
     #relacion con propietario
     propietario_id = Column(Integer, ForeignKey("usuarios.id"), nullable=False, index=True)
-    propietario = relationship("Usuarios", back_populates="negocios")
+    propietario = relationship("Usuario", back_populates="negocio")
 
     #relacion con servicio
     servicios = relationship("Servicio", back_populates="negocio")
     
     #relacion con reserva
-    reserva = relationship("Reserva", back_populates="negocio")
+    reservas = relationship("Reserva", back_populates="negocio")
     #soft delete
     deleted_at = Column(DateTime(timezone=True), nullable=True)
 
