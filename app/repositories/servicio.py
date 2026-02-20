@@ -5,8 +5,9 @@ from datetime import datetime, timezone
 
 class ServicioRepository:
     
-    def crear(self, db: Session, datos: ServicioCreate):
-        servicio = Servicio(**datos.model_dump())
+    def crear(self, db: Session, datos: ServicioCreate, negocio_id: int):
+        from app.models.servicio import Servicio as ServicioModel
+        servicio = ServicioModel(**datos.model_dump(), negocio_id=negocio_id)
 
         db.add(servicio)
         db.commit()

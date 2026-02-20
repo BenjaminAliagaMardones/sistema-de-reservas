@@ -22,6 +22,6 @@ class NegocioResponse(BaseModel):
     telefono: str
     direccion: str
     propietario_id: int
-    create_at: datetime
+    created_at: datetime
 
     model_config = {"from_attributes": True}
